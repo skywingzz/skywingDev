@@ -1,13 +1,7 @@
 package com.common;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
-
-import com.mysql.jdbc.CommunicationsException;
 
 public class jdbcTest {
 	public static void main(String[] args) throws Exception {
@@ -25,7 +19,7 @@ public class jdbcTest {
 		}
 	}
 	
-	public static Connection getDBConnection() throws SQLException, ClassNotFoundException, CommunicationsException{
+	public static Connection getDBConnection() throws SQLException, ClassNotFoundException{
 		Properties props = new Properties();
 		props.put("user", "skywing");
 		props.put("password", "triumph82");
