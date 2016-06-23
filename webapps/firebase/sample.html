@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+    var provider = new firebase.auth.GoogleAuthProvider();
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBq1AfKpv-KtwZc_x4nWeO22X2-D_1UkXw",
+        authDomain: "testDev.firebaseapp.com",
+        databaseURL: "https://testdev-db901.firebaseio.com",
+        storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database()
+
+
+    function writeNewPost(uid, username, title, body) {
+        // A post entry.
+        var postData = {
+            author: "skywing",
+            uid: "4WRmVkSo2gRilsQjqp9Acyfu7LB2",
+            body: "test",
+            title: "this is database test",
+            starCount: 0
+        };
+
+        // Get a key for a new Post.
+        var newPostKey = firebase.database().ref().child('posts').pus().key;
+        console.log(newPostKey)
+
+        // Write the new post's data simultaneously in the posts list and the user's post list.
+        var updates = {};
+        updates['/posts/' + newPostKey] = postData;
+        updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+        return firebase.database().ref().update(updates);
+    }
+
+    writeNewPost();
+</script>
+<body>
+
+</body>
+</html>

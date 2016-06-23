@@ -5,4 +5,5 @@ package com.kotlin
  */
 fun main(args: Array<String>) {
     println("Hello World")
+    println("this is first test")
 }

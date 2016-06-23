@@ -1,6 +1,10 @@
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by skywing on 2016. 2. 1..
@@ -52,6 +56,13 @@ public class test {
         System.out.println(rtnInt);
 
 
+        String month = addDateFromNow(Calendar.MONTH, -1, "yyyyMM");
+        System.out.println(month);
+
+        System.out.println(convertToLong("22.52", 0));
+
+
+
     }
 
     public static String filePathEncoding(String url) throws Exception {
@@ -60,4 +71,50 @@ public class test {
         return path + URLEncoder.encode(fileName, "UTF-8");
     }
 
+    public static String addDateFromNow(int field, int amount, String formatstr) {
+        Calendar cal = Calendar.getInstance();
+
+        cal.add(field, amount);
+        Date date = cal.getTime();
+
+        SimpleDateFormat formatter = new SimpleDateFormat(formatstr);
+        return formatter.format(date);
+
+    }
+
+    public static long convertToLong(Object value, long defaultValue){
+        try{
+            if(value == null) return defaultValue;
+            if(value instanceof BigDecimal) {
+                return  ((BigDecimal)value).longValue();
+
+            }else if(value instanceof Long) {
+                return  ((Long)value).longValue();
+
+            }else if(value instanceof Integer) {
+                return  ((Integer)value).longValue();
+
+            }else if(value instanceof Double) {
+                return  ((Double)value).longValue();
+
+            }else if(value instanceof Float) {
+                return  ((Float)value).longValue();
+
+            }else if(value instanceof Short) {
+                return  ((Short)value).longValue();
+
+            }else if(value instanceof BigInteger) {
+                return  ((BigInteger)value).longValue();
+
+            }else if(value instanceof Byte) {
+                return  ((Byte)value).longValue();
+
+            }else{
+                return Long.parseLong(value.toString());
+            }
+        }catch(Exception e){
+            //log.warn("long 형을 변환할 수 없는 Object 입니다.");
+        }
+        return defaultValue;
+    }
 }
